@@ -8,26 +8,26 @@ import {RadioButton} from 'primereact/components/radiobutton/RadioButton';
 import {RestService} from './RestService';
 
 class App extends Component {
-    
+
     constructor() {
         super();
-this.state = {count: 0, checked: '', test: {testStatus: ''}};
-        this.increment = this.increment.bind(this);
+        this.state = {count: 0, checked: '', test: {testStatus: ''}};
+        this.increment = this.increment.bind(this);        
         this.onCityChange = this.onCityChange.bind(this);
     }
-    
+
     componentDidMount() {
         new RestService().getTestResult().then(data => this.setState({count: 0, checked: '', test: data}));
     }
-    
+
     increment() {
         this.setState({count: this.state.count + 1, checked: ''});
     }
-    
+
     onCityChange(e) {
         this.setState({count: this.state.count, checked: e.value});
     }
-    
+
     render() {
         return (
           <div className="App">
@@ -35,7 +35,7 @@ this.state = {count: 0, checked: '', test: {testStatus: ''}};
               <img src={logo} className="App-logo" alt="logo" />
               <h2>Welcome to PrimeReact</h2>
             </div>
-            <div className="App-intro" style={{fontAlign: 'left'}}>             
+            <div className="App-intro" style={{fontAlign: 'left'}}>
               <p>{this.state.test.testStatus}</p>
               <p>Which method are you using? What are the regular events (and how long are those)?</p>
               <RadioButton value="3" onChange={this.onCityChange} checked={this.state.checked === '3'} />
@@ -46,7 +46,7 @@ this.state = {count: 0, checked: '', test: {testStatus: ''}};
               <br/><br/>
 	          {this.state.checked !== '' &&
 	              <label>Your score is: {this.state.checked}</label>
-	          }	          
+	          }
             </div>
           </div>
         );
