@@ -6,13 +6,20 @@ import 'primereact/resources/primereact.min.css';
 import 'font-awesome/css/font-awesome.css';
 import {RadioButton} from 'primereact/components/radiobutton/RadioButton';
 import {RestService} from './RestService';
+import Home from './Home';
+import About from './About';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 
 class App extends Component {
 
     constructor() {
         super();
         this.state = {count: 0, checked: '', test: {testStatus: ''}};
-        this.increment = this.increment.bind(this);        
+        this.increment = this.increment.bind(this);
         this.onCityChange = this.onCityChange.bind(this);
     }
 
@@ -31,6 +38,12 @@ class App extends Component {
     render() {
         return (
           <div className="App">
+          <Router>
+        <div className="container">
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+        </div>
+      </Router>
             <div className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
               <h2>Welcome to PrimeReact</h2>
