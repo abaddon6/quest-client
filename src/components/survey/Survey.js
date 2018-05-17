@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import {RadioButton} from 'primereact/components/radiobutton/RadioButton';
+import {InputText} from 'primereact/components/inputtext/InputText';
 import {Button} from 'primereact/components/button/Button';
 import {SurveyService} from './SurveyService.js';
+import {AuthService} from '../utils/AuthService.js';
 
 class Survey extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {surveyToken: props.surveyToken, checked: null, test: {response: null}};
+    this.state = {surveyToken: props.surveyToken, checked: null, test: {response: null}, value: null, emailSend: false};
     this.onCityChange = this.onCityChange.bind(this);
     this.startSurvey = this.startSurvey.bind(this);
+    this.login = this.login.bind(this);
   }
 
   componentDidMount() {
     new SurveyService().getSurvey().then(
         res => {
-          this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: res.data,}))
+          this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: res.data, value: null, emailSend: false}))
         }
     ).catch(error => {
         localStorage.setItem('jwtToken', null);
-        this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: {response: null}}))
+        this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: {response: null}, value: null, emailSend: false}))
       }
     );
   }
@@ -32,7 +35,21 @@ class Survey extends Component {
   }
 
   startSurvey() {
-    this.setState({surveyToken: 'test_token', checked: null, test: {response: null}});
+    this.setState({surveyToken: 'test_token', checked: null});
+  }
+
+  login(){
+    if(this.state.value != null){
+      new AuthService().login(this.state.value).then(
+          res => {
+            this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test:  {response: null}, value: null, emailSend: true}))
+          }
+      ).catch(error => {
+          localStorage.setItem('jwtToken', null);
+          this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: {response: null}, value: null, emailSend: false}))
+        }
+      );
+    }
   }
 
   render(){
@@ -66,6 +83,14 @@ class Survey extends Component {
       return (
         <div style={{margin: '30px'}}>
           <Button label="Start survey" onClick={this.startSurvey} />
+          <div style={{margin: '20px'}}>or login as administrator</div>
+          <span className="ui-float-label">
+            <InputText id="email-input" type="text" onChange={(e) => this.setState({value: e.target.value})} />
+            <label htmlFor="email-input">E-mail address</label>
+            <Button label="Login" onClick={this.login}  />
+          </span>
+          <br />
+          {this.state.emailSend ? 'Authentication e-mail was send. Please receive it and click login link.' : ''}
         </div>
       );
     }
