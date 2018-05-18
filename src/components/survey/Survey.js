@@ -9,7 +9,7 @@ class Survey extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {surveyToken: props.surveyToken, checked: null, test: {response: null}, value: null, emailSend: false};
+    this.state = {surveyToken: props.surveyToken, checked: null, test: {}, value: null, emailSend: false};
     this.onCityChange = this.onCityChange.bind(this);
     this.startSurvey = this.startSurvey.bind(this);
     this.login = this.login.bind(this);
@@ -22,7 +22,7 @@ class Survey extends Component {
         }
     ).catch(error => {
         localStorage.setItem('jwtToken', null);
-        this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: {response: null}, value: null, emailSend: false}))
+        this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: {}, value: null, emailSend: false}))
       }
     );
   }
@@ -42,11 +42,11 @@ class Survey extends Component {
     if(this.state.value != null){
       new AuthService().login(this.state.value).then(
           res => {
-            this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test:  {response: null}, value: null, emailSend: true}))
+            this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test:  {}, value: null, emailSend: true}))
           }
       ).catch(error => {
           localStorage.setItem('jwtToken', null);
-          this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: {response: null}, value: null, emailSend: false}))
+          this.setState(() => ({surveyToken: this.state.surveyToken, count: 0, checked: null, test: {}, value: null, emailSend: false}))
         }
       );
     }
@@ -75,7 +75,7 @@ class Survey extends Component {
                 <label>Your score is: {this.state.checked}</label>
             }
           </div>
-          <div style={{margin: '30px'}}>Read from backend: {this.state.test.response}</div>
+          <div style={{margin: '30px'}}>Read from backend: {this.state.test.name}</div>
         </div>
       );
     }
