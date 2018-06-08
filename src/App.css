@@ -1,4 +1,51 @@
-.App-intro {
-  padding: 2em;
-  font-size: large;
+.ui-widget{
+  font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+}
+
+.ui-widget-header{
+  text-align: center;
+}
+
+.ui-dataview-content{
+  border:0 !important;
+}
+
+.ui-card{
+  border:0 !important;
+}
+
+.ui-state-active{
+  color: #2e6e9e !important;
+}
+
+.ui-growl-message-info{
+  background-color: #5bc0de !important;
+}
+
+.ui-growl-message-error{
+  background-color: #d9534f !important;
+}
+
+.ui-growl-message-warn{
+  background-color: #f0ad4e !important;
+}
+
+.ui-growl-message-success{
+  background-color: #4cae4c !important;
+}
+
+.ui-panel{
+  height: 100%;
+}
+
+.primary{
+  color: #5c9ccc;
+}
+
+.success{
+  color: green !important;
+}
+
+body{
+  color: #6b6b6b !important;
 }

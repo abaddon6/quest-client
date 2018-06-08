@@ -1,0 +1,50 @@
+.ui-progressbar {
+    height: 0.5em;
+    margin-top: -1px;
+}
+
+.ui-corner-all {
+    border-radius: 0px;
+}
+
+.sc-step {
+  color: #555555;
+  font-size: 80%;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.sc-step-disabled {
+  color: #555555;
+  font-size: 80%;
+  padding: 0px;
+  opacity: 0.35;
+}
+
+.sc-step-number{
+  background-color: #5c9ccc;
+  color: #FFFFFF;
+  display: inline-block;
+  width: 26px;
+  border-radius: 50%;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.sc-step-name {
+  padding-right: 2px;
+}
+
+@media (max-width: 30em) {
+  .sc-step-name {
+      display: none;
+  }
+}
+
+.sc-navigation {
+  cursor: pointer;
+}
+
+.sc-navigation-disabled {
+  opacity: 0.35;
+}

@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import Survey from './survey/Survey.js';
+import SurveyMaker from './survey/SurveyMaker.js';
 import QS from 'query-string'
-import logo from '../resources/images/logo.svg';
 
 class SurveyLayout extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {surveyToken: QS.parse(props.location.search).surveyToken};
+    this.state = {attemptId: QS.parse(props.location.search).attemptId,
+                  summary: QS.parse(props.location.search).summary};
   }
 
   render(){
     return(
       <div>
-        <nav className="navbar navbar-expand-lg ui-widget-header">
-          <img className="navbar-brand" src={logo} alt="logo" />
-          <span className="navbar-brand">Quest - surveys with expert system</span>
-        </nav>
-        <div>
-          <Survey surveyToken={this.state.surveyToken} />
-        </div>
+        {this.state.attemptId
+          ?
+            <SurveyMaker attemptId={this.state.attemptId} summary={this.state.summary} />
+          :
+            <Survey />
+        }
       </div>
     );
   }

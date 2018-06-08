@@ -1,7 +1,7 @@
 import {GeneralService} from '../utils/GeneralService.js';
 
 export class SurveyService extends GeneralService{
-  getSurvey() {
-    return this.get('survey/');
+  getAllSurveys() {
+    return this.get('surveys/');
   }
 }
